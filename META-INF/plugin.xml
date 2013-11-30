@@ -1,0 +1,89 @@
+<idea-plugin url="http://www.smardec.com/products/idea.html">
+    <name>TabMover</name>
+    <description>
+      <![CDATA[
+        TabReorder plugin allows to reorder editor tabs using keyboard shortcuts.
+        <br>Shortcuts:
+        <br>- <i>Control+Alt+Shift+Left</i> to move tab left;
+        <br>- <i>Control+Alt+Shift+Right</i> to move tab right;
+        <br>- <i>Control+Alt+Shift+Up</i> to make tab first;
+        <br>- <i>Control+Alt+Shift+Down</i> to make tab last;
+        <br>- <i>Control+Alt+Shift+PageUp</i> to move tab to previous splitter (tabgroup);
+        <br>- <i>Control+Alt+Shift+PageDown</i> to make tab to next splitter (tabgroup);
+        <br>- <i>Control+Alt+Shift+P</i> to move all pinned tabs to the beginning of the tablist;
+        <br>The plugin is open source (LGPL). The distribution can be found at.
+        1.2
+      ]]>
+    </description>
+
+    <change-notes>
+      <![CDATA[
+        1.2 - move tab to new window
+        TODO - move tab to next splitter or next window
+        TODO - focus next window
+
+      ]]>
+    </change-notes>
+
+    <!--
+
+    TODO:
+    - group pinned tabs to the beginning
+    - move tab to other splitter
+    - move tab to other window
+    - prevent tab to move before pinned
+    -->
+    <version>1.2.0</version>
+    <vendor email="mikinw.development@gmail.com" url="http://mikinw.blogspot.co.uk">MikiNW</vendor>
+    <idea-version since-build="107.105"/>
+
+    <application-components>
+        <component>
+            <implementation-class>com.mnw.tabmover.TabMoverAppComponent</implementation-class>
+        </component>
+    </application-components>
+    <actions>
+
+        <action id="com.mnw.tabmover.MoveTabToFirstAction" class="com.mnw.tabmover.MoveTabToFirstAction" text="Move Tab to First" description="Moves selected tab to the first position">
+            <keyboard-shortcut first-keystroke="alt shift control UP" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabUpAction" class="com.mnw.tabmover.MoveTabUpAction" text="Move Tab to Previous" description="Moves selected tab to the previous position">
+            <keyboard-shortcut first-keystroke="alt shift control LEFT" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabDownAction" class="com.mnw.tabmover.MoveTabDownAction" text="Move Tab to Next" description="Moves selected tab to the next position">
+            <keyboard-shortcut first-keystroke="alt shift control RIGHT" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToLastAction" class="com.mnw.tabmover.MoveTabToLastAction" text="Move Tab to Last" description="Moves selected tab to the end of the list of tabs">
+            <keyboard-shortcut first-keystroke="alt shift control DOWN" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToNextSplitter" class="com.mnw.tabmover.MoveTabToNextSplitter" text="Move Tab to Next Splitter" description="Moves selected tab to the next splitter">
+            <keyboard-shortcut first-keystroke="alt shift control OPEN_BRACKET" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToPreviousSplitter" class="com.mnw.tabmover.MoveTabToPreviousSplitter" text="Move Tab to Previous Splitter" description="Moves selected tab to the previous splitter">
+            <keyboard-shortcut first-keystroke="alt shift control CLOSE_BRACKET" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToNextWindow" class="com.mnw.tabmover.MoveTabToNextWindow" text="Move Tab to Next Window" description="Moves selected tab to the next window">
+            <keyboard-shortcut first-keystroke="alt shift control PAGE_DOWN" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToPreviousWindow" class="com.mnw.tabmover.MoveTabToPreviousWindow" text="Move Tab to Previous Window" description="Moves selected tab to the previous window">
+            <keyboard-shortcut first-keystroke="alt shift control PAGE_UP" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveTabToNewWindow" class="com.mnw.tabmover.MoveTabToNewWindow" text="Move Tab to New Window" description="Creates a new window with the current tab in it">
+            <keyboard-shortcut first-keystroke="alt shift control D" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MovePinnedTabsToFirst" class="com.mnw.tabmover.MovePinnedTabsToFirst" text="Move Pinned Tabs to First" description="Groups pinned tabs to the beginning of the list of tabs">
+            <keyboard-shortcut first-keystroke="alt shift control P" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveFocusToNextWindow" class="com.mnw.tabmover.MoveFocusToNextWindow" text="Move Focus to Next Window" description="Moves the cursor to the next project window">
+            <keyboard-shortcut first-keystroke="alt shift control G" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.MoveFocusToPreviousWindow" class="com.mnw.tabmover.MoveFocusToPreviousWindow" text="Move Focus to Previous First" description="Moves the cursor to the previous project window">
+            <keyboard-shortcut first-keystroke="alt shift control F" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.SortByTimestamp" class="com.mnw.tabmover.SortByTimestamp" text="Sort by timestamp" description="Moves the cursor to the previous project window">
+            <keyboard-shortcut first-keystroke="alt shift control S" keymap="$default"/>
+        </action>
+
+
+    </actions>
+</idea-plugin>

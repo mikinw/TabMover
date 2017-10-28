@@ -1,0 +1,133 @@
+<idea-plugin version="2">
+    <id>com.mnw.tabmover</id>
+    <name>TabMover</name>
+    <version>1.3.0</version>
+    <vendor email="mikinw.development@gmail.com" url="https://github.com/mikinw/TabMover">MikiNW</vendor>
+    <description>
+      <![CDATA[
+        TabReorder plugin allows to reorder and move editor tabs using keyboard shortcuts.
+        <br>Default shortcuts, but I recommend checking them with your current keymap:
+        <br>- <i>Control+Alt+Shift+Left</i> to move tab left;
+        <br>- <i>Control+Alt+Shift+Right</i> to move tab right;
+        <br>- <i>Control+Alt+Shift+Up</i> to make tab first;
+        <br>- <i>Control+Alt+Shift+Down</i> to make tab last;
+        <br>- <i>no default keystroke</i> to move tab to previous splitter (tabgroup) within the same window;
+        <br>- <i>no default keystroke</i> to make tab to next splitter (tabgroup) within the same window;
+        <br>- <i>Control+Alt+Shift+PageUp</i> to move tab to previous splitter or window (depending on which comes first);
+        <br>- <i>Control+Alt+Shift+PageDown</i> to make tab to next splitter or window (depending on which comes first);
+        <br>- <i>Control+Alt+Shift+OpenBracket</i> to focus previous splitter or window (depending on which comes first);
+        <br>- <i>Control+Alt+Shift+CloseBracket</i> to focus next splitter or window (depending on which comes first);
+        <br>- <i>Control+Alt+Shift+D</i> to open a new window with the current tab;
+        <br>- <i>Control+Alt+Shift+P,P</i> to move all pinned tabs to the beginning of the tablist;
+        <br>- <i>Control+Alt+Shift+P,T</i> to pin all tabs that are not pinned. Or if all tabs are pinned, unpin all;
+        <br>- <i>Alt+Shift+T</i> show action popup with possible actions;
+        <br>The plugin is open source (LGPL).
+        1.3
+        <p>If you find this plugin useful, please consider inviting me for a beer.
+        I develop this plugin in my free time and I'm more motivated when I have a beer on desk :-)
+
+        <br> http://PayPal.Me/mnwDevelopment/
+      ]]>
+    </description>
+
+    <change-notes>
+      <![CDATA[
+        1.3 - pin all tabs, move pinned tabs to start, action popup
+        1.2 - move tab to new window
+        1.1 - move tab to next splitter or next window
+        1.1 - focus next window
+
+      ]]>
+    </change-notes>
+
+    <!--
+
+    TODO:
+    - prevent tab to move before pinned
+    -->
+    <idea-version since-build="135"/>
+    <depends>com.intellij.modules.lang</depends>
+
+    <application-components>
+        <component>
+            <implementation-class>com.mnw.tabmover.TabMoverAppComponent</implementation-class>
+        </component>
+    </application-components>
+    <actions>
+
+        <action id="com.mnw.tabmover.actions.MoveTabToFirstAction" class="com.mnw.tabmover.actions.MoveTabToFirstAction"
+                text="Move Tab to First" description="Moves selected tab to the first position">
+            <keyboard-shortcut first-keystroke="alt shift control UP" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabUpAction" class="com.mnw.tabmover.actions.MoveTabUpAction"
+                text="Move Tab to Previous" description="Moves selected tab to the previous position">
+            <keyboard-shortcut first-keystroke="alt shift control LEFT" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabDownAction" class="com.mnw.tabmover.actions.MoveTabDownAction"
+                text="Move Tab to Next" description="Moves selected tab to the next position">
+            <keyboard-shortcut first-keystroke="alt shift control RIGHT" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToLastAction" class="com.mnw.tabmover.actions.MoveTabToLastAction"
+                text="Move Tab to Last" description="Moves selected tab to the end of the list of tabs">
+            <keyboard-shortcut first-keystroke="alt shift control DOWN" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToNextSplitter" class="com.mnw.tabmover.actions.MoveTabToNextSplitter"
+                text="Move Tab to Next Splitter" description="Moves selected tab to the next splitter">
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToPreviousSplitter" class="com.mnw.tabmover.actions.MoveTabToPreviousSplitter"
+                text="Move Tab to Previous Splitter" description="Moves selected tab to the previous splitter">
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToNextWindow" class="com.mnw.tabmover.actions.MoveTabToNextWindow"
+                text="Move Tab to Next Window/Splitter" description="Moves selected tab to the next window or splitter">
+            <keyboard-shortcut first-keystroke="alt shift control PAGE_DOWN" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToPreviousWindow" class="com.mnw.tabmover.actions.MoveTabToPreviousWindow"
+                text="Move Tab to Previous Window/Splitter" description="Moves selected tab to the previous window or splitter">
+            <keyboard-shortcut first-keystroke="alt shift control PAGE_UP" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveTabToNewWindow" class="com.mnw.tabmover.actions.MoveTabToNewWindow"
+                text="Move Tab to New Window" description="Creates a new window with the current tab in it">
+            <keyboard-shortcut first-keystroke="alt shift control D" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveFocusToNextWindow" class="com.mnw.tabmover.actions.MoveFocusToNextWindow"
+                text="Focus Next Window/Splitter (same Project)" description="Moves the cursor to the next project window or splitter">
+            <keyboard-shortcut first-keystroke="alt shift control OPEN_BRACKET" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MoveFocusToPreviousWindow" class="com.mnw.tabmover.actions.MoveFocusToPreviousWindow"
+                text="Focus Previous Window/Splitter (same Project)" description="Moves the cursor to the previous project window or splitter">
+            <keyboard-shortcut first-keystroke="alt shift control CLOSE_BRACKET" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.MovePinnedTabsToFirst" class="com.mnw.tabmover.actions.MovePinnedTabsToFirst"
+                text="Move Pinned Tabs to First" description="Groups pinned tabs to the beginning of the list of tabs">
+            <keyboard-shortcut first-keystroke="alt shift control P" second-keystroke="P" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.TogglePinOnAllOpenTabsAction" class="com.mnw.tabmover.actions.TogglePinOnAllOpenTabsAction"
+                text="Toggle Pin on all Tabs" description="Pin all if there is unpinned, unpin all if all are pinned">
+            <keyboard-shortcut first-keystroke="alt shift control P" second-keystroke="T" keymap="$default"/>
+        </action>
+        <action id="com.mnw.tabmover.actions.ShowTabMoveActions" class="com.mnw.tabmover.actions.ShowTabMoveActions"
+                text="Show all TabMover Actions" description="Show a popup with all available actions">
+            <keyboard-shortcut first-keystroke="alt shift T" keymap="$default"/>
+        </action>
+
+        <group id="com.mnw.tabmover.group" class="com.mnw.tabmover.actions.TabMoverActionGroup" popup="true"
+               text="Move Tab">
+                <reference id="com.mnw.tabmover.actions.MoveTabToFirstAction" />
+                <reference id="com.mnw.tabmover.actions.MoveTabUpAction" />
+                <reference id="com.mnw.tabmover.actions.MoveTabDownAction" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToLastAction" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToNextSplitter" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToPreviousSplitter" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToNextWindow" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToPreviousWindow" />
+                <reference id="com.mnw.tabmover.actions.MoveTabToNewWindow" />
+                <reference id="com.mnw.tabmover.actions.MoveFocusToNextWindow" />
+                <reference id="com.mnw.tabmover.actions.MoveFocusToPreviousWindow" />
+                <reference id="com.mnw.tabmover.actions.MovePinnedTabsToFirst" />
+                <reference id="com.mnw.tabmover.actions.TogglePinOnAllOpenTabsAction" />
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </group>
+
+
+    </actions>
+</idea-plugin>

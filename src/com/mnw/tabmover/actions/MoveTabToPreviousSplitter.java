@@ -1,4 +1,4 @@
-package com.mnw.tabmover;
+package com.mnw.tabmover.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -6,15 +6,12 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
 import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
-import com.intellij.openapi.fileEditor.impl.FileEditorManagerImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
-/**
- * TODO description of this class is missing
- */
-public class MoveTabToNewWindow extends AnAction {
+public class MoveTabToPreviousSplitter extends AnAction {
 
+    @Override
     public void actionPerformed(AnActionEvent event) {
         final Project project = PlatformDataKeys.PROJECT.getData(event.getDataContext());
         final FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(project);
@@ -22,12 +19,16 @@ public class MoveTabToNewWindow extends AnAction {
 
         if (activeWindowPane == null) return; // Action invoked when no files are open; do nothing
 
-        if (!(fileEditorManagerEx instanceof FileEditorManagerImpl)) return;
+        final EditorWindow prevWindowPane = fileEditorManagerEx.getPrevWindow(activeWindowPane);
 
-        final FileEditorManagerImpl fileEditorManagerImpl = (FileEditorManagerImpl) fileEditorManagerEx;
+        if (prevWindowPane == activeWindowPane) return; // Action invoked with one pane open; do nothing
+
         final EditorWithProviderComposite activeEditorTab = activeWindowPane.getSelectedEditor();
         final VirtualFile activeFile = activeEditorTab.getFile();
 
-        fileEditorManagerImpl.openFileInNewWindow(activeFile);
+        prevWindowPane.getManager().openFileImpl2(prevWindowPane, activeFile, true);
+
+        activeWindowPane.closeFile(activeFile, true, false);
     }
+
 }

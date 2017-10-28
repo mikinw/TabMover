@@ -3,20 +3,22 @@ package com.mnw.tabmover;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
 
-public class NextWindowStrategy {
-    public NextWindowStrategy() { }
+public class NextWindowStrategy implements OtherWindowStrategy {
 
-    EditorWindow getNextWindow(final FileEditorManagerEx fileEditorManagerEx, final EditorWindow activeWindowPane) {
+    @Override
+    public EditorWindow getOtherWindow(final FileEditorManagerEx fileEditorManagerEx,
+                                       final EditorWindow activeWindowPane) {
         final EditorWindow[] windows = fileEditorManagerEx.getWindows();
 
         int i = 0;
-        for (; i < windows.length; i++) {
+        final int length = windows.length;
+        for (; i < length; i++) {
             if (windows[i] == activeWindowPane) {
                 break;
             }
         }
         i++;
-        if (i >= windows.length) {
+        if (i >= length) {
             i = 0;
         }
 

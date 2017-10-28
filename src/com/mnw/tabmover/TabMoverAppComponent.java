@@ -23,10 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * TODO description of this class is missing
- */
-public class TabMoverAppComponent implements ApplicationComponent, EditorFactoryListener, Disposable, ProjectManagerListener {
+public class TabMoverAppComponent implements ApplicationComponent, Disposable, ProjectManagerListener {
 
     private Map<VirtualFile, Long> fileMap;
 
@@ -52,56 +49,6 @@ public class TabMoverAppComponent implements ApplicationComponent, EditorFactory
         return "TabMover";
     }
 
-    public void moveFocusToWindowPane(final EditorWindow windowPane) {
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-            public void run() {
-                moveFocus(windowPane);
-            }
-        });
-    }
-
-    private void moveFocus(final EditorWindow windowPane) {
-//        windowPane.setSelectedEditor(windowPane.findFileComposite(activeFile), true);
-//        final boolean b = windowPane.getOwner().requestFocus(false);
-//        final boolean b1 = windowPane.getOwner().requestFocusInWindow();
-        windowPane.requestFocus(true);
-    }
-
-    @Override
-    public void editorCreated(@NotNull EditorFactoryEvent event) {
-        final Project project = event.getEditor().getProject();
-//        FileEditorManagerEx.getInstanceEx(project).addFileEditorManagerListener(this);
-
-//        final EditorWindow activeWindowPane = EditorWindow.DATA_KEY.getData(project);
-
-//        WindowManagerImpl.getInstanceEx().
-//        event.getEditor().;
-
-        if (project == null) return;
-        project.getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerAdapter() {
-            @Override
-            public void selectionChanged(@NotNull FileEditorManagerEvent event) {
-            }
-
-            @Override
-            public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                fileMap.put(file, System.currentTimeMillis());
-
-                System.out.println("fileOpen. content:");
-                System.out.println(fileMap);
-            }
-
-            @Override
-            public void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                fileMap.remove(file);
-            }
-        });
-    }
-
-    @Override
-    public void editorReleased(@NotNull EditorFactoryEvent event) {
-
-    }
 
     @Override
     public void dispose() {
@@ -117,18 +64,20 @@ public class TabMoverAppComponent implements ApplicationComponent, EditorFactory
 
             @Override
             public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                if (fileMap.containsKey(file)) return;
+                if (fileMap.containsKey(file)) {
+                    return;
+                }
                 fileMap.put(file, System.currentTimeMillis());
 
-                System.out.println("fileOpened(). " + file);
-                System.out.println("fileOpen. content:");
-                System.out.println(fileMap);
+                //System.out.println("fileOpened(). " + file);
+                //System.out.println("fileOpen. content:");
+                //System.out.println(fileMap);
             }
 
             @Override
             public void fileClosed(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
                 fileMap.remove(file);
-                System.out.println("fileClosed(). " + file);
+                //System.out.println("fileClosed(). " + file);
 
             }
         });
@@ -137,17 +86,17 @@ public class TabMoverAppComponent implements ApplicationComponent, EditorFactory
 
     @Override
     public boolean canCloseProject(Project project) {
-        return false;
+        return true;
     }
 
     @Override
     public void projectClosed(Project project) {
-        fileMap.clear();
 
     }
 
     @Override
     public void projectClosing(Project project) {
+        fileMap.clear();
 
     }
 }

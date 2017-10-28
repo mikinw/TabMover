@@ -1,4 +1,4 @@
-package com.mnw.tabmover;
+package com.mnw.tabmover.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -13,6 +13,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.tabs.JBTabs;
 import com.intellij.ui.tabs.TabInfo;
+import com.mnw.tabmover.TabMoverAppComponent;
 
 /**
  * TODO description of this class is missing
@@ -20,7 +21,7 @@ import com.intellij.ui.tabs.TabInfo;
 public class SortByTimestamp extends AnAction {
 
     public void actionPerformed(AnActionEvent event) {
-        final EditorWindow editorWindow = EditorWindow.DATA_KEY.getData(event.getDataContext());
+        /*final EditorWindow editorWindow = EditorWindow.DATA_KEY.getData(event.getDataContext());
         if (editorWindow == null) return; // Action invoked when no files are open; do nothing
 
         final EditorWithProviderComposite[] editorTabs = editorWindow.getEditors();
@@ -51,7 +52,7 @@ public class SortByTimestamp extends AnAction {
         tabs.removeTab(selectedInfo);
         tabs.addTab(selectedInfo, 0);
         tabs.select(selectedInfo, true);
-
+*/
 
     }
 }

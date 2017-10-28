@@ -1,4 +1,4 @@
-package com.mnw.tabmover;
+package com.mnw.tabmover.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -6,31 +6,31 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
 import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
+import com.intellij.openapi.fileEditor.impl.FileEditorManagerImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
-/**
- * TODO description of this class is missing
- */
-public class MoveTabToPreviousSplitter extends AnAction {
+public class MoveTabToNewWindow extends AnAction {
 
-    public void actionPerformed(AnActionEvent event) {
-        final Project project = PlatformDataKeys.PROJECT.getData(event.getDataContext());
+    @Override
+    public void actionPerformed(AnActionEvent anActionEvent) {
+        final Project project = PlatformDataKeys.PROJECT.getData(anActionEvent.getDataContext());
+        if (project == null) {
+            return;
+        }
         final FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(project);
-        final EditorWindow activeWindowPane = EditorWindow.DATA_KEY.getData(event.getDataContext());
+        final EditorWindow activeWindowPane = EditorWindow.DATA_KEY.getData(anActionEvent.getDataContext());
 
         if (activeWindowPane == null) return; // Action invoked when no files are open; do nothing
 
-        final EditorWindow prevWindowPane = fileEditorManagerEx.getPrevWindow(activeWindowPane);
+        if (!(fileEditorManagerEx instanceof FileEditorManagerImpl)) return;
 
-        if (prevWindowPane == activeWindowPane) return; // Action invoked with one pane open; do nothing
-
+        final FileEditorManagerImpl fileEditorManagerImpl = (FileEditorManagerImpl) fileEditorManagerEx;
         final EditorWithProviderComposite activeEditorTab = activeWindowPane.getSelectedEditor();
         final VirtualFile activeFile = activeEditorTab.getFile();
 
-        prevWindowPane.getManager().openFileImpl2(prevWindowPane, activeFile, true);
-
         activeWindowPane.closeFile(activeFile, true, false);
-    }
 
+        fileEditorManagerImpl.openFileInNewWindow(activeFile);
+    }
 }

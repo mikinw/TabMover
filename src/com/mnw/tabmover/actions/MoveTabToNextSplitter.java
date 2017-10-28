@@ -1,4 +1,4 @@
-package com.mnw.tabmover;
+package com.mnw.tabmover.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -9,11 +9,9 @@ import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
-/**
- * TODO description of this class is missing
- */
 public class MoveTabToNextSplitter extends AnAction {
 
+    @Override
     public void actionPerformed(AnActionEvent event) {
         final Project project = PlatformDataKeys.PROJECT.getData(event.getDataContext());
         final FileEditorManagerEx fileEditorManager = FileEditorManagerEx.getInstanceEx(project);

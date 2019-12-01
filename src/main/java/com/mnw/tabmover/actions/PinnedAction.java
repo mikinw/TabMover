@@ -1,14 +1,14 @@
 package com.mnw.tabmover.actions;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.impl.EditorTabbedContainer;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.tabs.JBTabs;
 import com.intellij.ui.tabs.TabInfo;
 
-public abstract class PinnedAction extends AnAction {
+public abstract class PinnedAction extends DumbAwareAction {
     protected EditorWindow editorWindow;
     protected JBTabs tabs;
 

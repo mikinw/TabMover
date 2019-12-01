@@ -1,15 +1,15 @@
 package com.mnw.tabmover.actions;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.mnw.tabmover.OtherWindowStrategy;
 
-public abstract class WindowAction extends AnAction {
+public abstract class WindowAction extends DumbAwareAction {
     private final OtherWindowStrategy otherWindowStrategy;
     protected EditorWindow otherWindowPane;
     protected EditorWindow activeWindowPane;

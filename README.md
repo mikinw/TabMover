@@ -29,8 +29,9 @@ I develop this plugin in my free time and I'm more motivated when I have a beer 
 http://PayPal.Me/mnwDevelopment/
 
 Versions:
-        1.3 - pin all tabs, move pinned tabs to start, action popup
-        1.2 - move tab to new window
-        1.1 - move tab to next splitter or next window
-        1.1 - focus next window
+* 1.4 - make actions dumb aware
+* 1.3 - pin all tabs, move pinned tabs to start, action popup
+* 1.2 - move tab to new window
+* 1.1 - move tab to next splitter or next window
+* 1.1 - focus next window
 

@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin>
     <id>com.mnw.tabmover</id>
     <name>TabMover</name>
     <version>1.3.0</version>
@@ -32,11 +32,13 @@
 
     <change-notes>
       <![CDATA[
-        1.3 - pin all tabs, move pinned tabs to start, action popup
-        1.2 - move tab to new window
-        1.1 - move tab to next splitter or next window
-        1.1 - focus next window
-
+        <ul>
+          <li>1.4 - make actions dumb aware</li>
+          <li>1.3 - pin all tabs, move pinned tabs to start, action popup</li>
+          <li>1.2 - move tab to new window</li>
+          <li>1.1 - move tab to next splitter or next window</li>
+          <li>1.1 - focus next window</li>
+        </ul>
       ]]>
     </change-notes>
 

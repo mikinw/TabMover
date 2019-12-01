@@ -1,6 +1,8 @@
 TabMover
 ========
 
+[![JetBrains plugins](https://img.shields.io/jetbrains/plugin/v/10131-tabmover.svg)](https://plugins.jetbrains.com/plugin/10131-tabmover)
+
 IntelliJ Idea plugin with which you can move and rearrange Editor tabs (even between different IntelliJ windows on multiple monitors).
 
 

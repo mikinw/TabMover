@@ -5,12 +5,13 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorTabbedContainer;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.util.Condition;
 import com.intellij.ui.ShowSplashAction;
 
-public class ShowTabMoveActions extends AnAction {
+public class ShowTabMoveActions extends DumbAwareAction {
 
     private static final boolean SHOW_NUMBERS = true;
     private static final boolean USE_ALPHA_AS_NUMBERS = true;

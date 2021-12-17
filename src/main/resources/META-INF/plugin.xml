@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.mnw.tabmover</id>
     <name>TabMover</name>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
     <vendor email="mikinw.development@gmail.com" url="https://github.com/mikinw/TabMover">MikiNW</vendor>
     <description>
       <![CDATA[
@@ -22,7 +22,7 @@
         <br>- <i>Control+Alt+Shift+P,T</i> to pin all tabs that are not pinned. Or if all tabs are pinned, unpin all;
         <br>- <i>Alt+Shift+T</i> show action popup with possible actions;
         <br>The plugin is open source (LGPL).
-        1.3
+        1.4
         <p>If you find this plugin useful, please consider inviting me for a beer.
         I develop this plugin in my free time and I'm more motivated when I have a beer on desk :-)
 
@@ -47,7 +47,7 @@
     TODO:
     - prevent tab to move before pinned
     -->
-    <idea-version since-build="135"/>
+    <idea-version since-build="191"/>
     <depends>com.intellij.modules.lang</depends>
 
     <application-components>

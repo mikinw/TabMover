@@ -24,6 +24,7 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+*.dont.commit
 
 # Gradle
 .idea/**/gradle.xml

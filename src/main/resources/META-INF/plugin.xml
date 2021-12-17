@@ -42,19 +42,9 @@
       ]]>
     </change-notes>
 
-    <!--
-
-    TODO:
-    - prevent tab to move before pinned
-    -->
     <idea-version since-build="191"/>
     <depends>com.intellij.modules.lang</depends>
 
-    <application-components>
-        <component>
-            <implementation-class>com.mnw.tabmover.TabMoverAppComponent</implementation-class>
-        </component>
-    </application-components>
     <actions>
 
         <action id="com.mnw.tabmover.actions.MoveTabToFirstAction" class="com.mnw.tabmover.actions.MoveTabToFirstAction"

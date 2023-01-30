@@ -3,8 +3,8 @@ package com.mnw.tabmover.actions;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
+import com.intellij.openapi.fileEditor.impl.EditorComposite;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
-import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
 import com.intellij.openapi.fileEditor.impl.FileEditorManagerImpl;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
@@ -26,11 +26,13 @@ public class MoveTabToNewWindow extends DumbAwareAction {
         if (!(fileEditorManagerEx instanceof FileEditorManagerImpl)) return;
 
         final FileEditorManagerImpl fileEditorManagerImpl = (FileEditorManagerImpl) fileEditorManagerEx;
-        final EditorWithProviderComposite activeEditorTab = activeWindowPane.getSelectedEditor();
-        final VirtualFile activeFile = activeEditorTab.getFile();
+        final EditorComposite activeEditorTab = activeWindowPane.getSelectedComposite();
+        if (activeEditorTab != null) {
+            final VirtualFile activeFile = activeEditorTab.getFile();
 
-        activeWindowPane.closeFile(activeFile, true, false);
+            activeWindowPane.closeFile(activeFile, true, false);
 
-        fileEditorManagerImpl.openFileInNewWindow(activeFile);
+            fileEditorManagerImpl.openFileInNewWindow(activeFile);
+        }
     }
 }

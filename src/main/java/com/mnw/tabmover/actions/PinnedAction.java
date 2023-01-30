@@ -19,9 +19,6 @@ public abstract class PinnedAction extends DumbAwareAction {
             return;
         }
         final EditorTabbedContainer tabbedPane = editorWindow.getTabbedPane();
-        if (tabbedPane == null) {
-            return;
-        }
         tabs = tabbedPane.getTabs();
 
 

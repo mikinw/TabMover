@@ -3,8 +3,8 @@ package com.mnw.tabmover.actions;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
+import com.intellij.openapi.fileEditor.impl.EditorComposite;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
-import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -23,11 +23,13 @@ public class MoveTabToNextSplitter extends DumbAwareAction {
 
         if (nextWindowPane == activeWindowPane) return; // Action invoked with one pane open; do nothing
 
-        final EditorWithProviderComposite activeEditorTab = activeWindowPane.getSelectedEditor();
-        final VirtualFile activeFile = activeEditorTab.getFile();
+        final EditorComposite activeEditorTab = activeWindowPane.getSelectedComposite();
+        if (activeEditorTab != null) {
+            final VirtualFile activeFile = activeEditorTab.getFile();
 
-        nextWindowPane.getManager().openFileImpl2(nextWindowPane, activeFile, true);
+            nextWindowPane.getManager().openFileImpl2(nextWindowPane, activeFile, true);
 
-        activeWindowPane.closeFile(activeFile, true, false);
+            activeWindowPane.closeFile(activeFile, true, false);
+        }
     }
 }

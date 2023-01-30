@@ -21,9 +21,6 @@ public abstract class SameSplitterAction extends DumbAwareAction {
         }
 
         tabbedPane = editorWindow.getTabbedPane();
-        if (tabbedPane == null) {
-            return;
-        }
         tabs = tabbedPane.getTabs();
         selectedInfo = tabs.getSelectedInfo();
         if (selectedInfo == null) {

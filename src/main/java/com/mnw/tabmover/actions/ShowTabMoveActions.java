@@ -11,6 +11,9 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.util.Condition;
 import com.intellij.ui.ShowSplashAction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShowTabMoveActions extends DumbAwareAction {
 
     private static final boolean SHOW_NUMBERS = true;
@@ -31,15 +34,21 @@ public class ShowTabMoveActions extends DumbAwareAction {
         final AnAction[] actionGroupChildren = actionGroup.getChildren(anActionEvent);
         final int childrenCount = actionGroup.getChildrenCount();
 
+        final List<AnAction> enabledActions = new ArrayList<>();
 
         for (int i = 0; i < childrenCount; i++) {
-            final Presentation templatePresentation = actionGroupChildren[i].getTemplatePresentation();
             if (actionGroupChildren[i] instanceof WindowAction
                     || actionGroupChildren[i] instanceof MoveTabToNextSplitter
                     || actionGroupChildren[i] instanceof MoveTabToPreviousSplitter) {
-                templatePresentation.setEnabled(windowCount > 1);
+                if (windowCount > 1) {
+                    enabledActions.add(actionGroupChildren[i]);
+                }
             } else if (actionGroupChildren[i] instanceof ShowSplashAction) {
-                templatePresentation.setEnabled(tabsCount > 1);
+                if (tabsCount > 1) {
+                    enabledActions.add(actionGroupChildren[i]);
+                }
+            } else {
+                enabledActions.add(actionGroupChildren[i]);
             }
 /*            if (templatePresentation.getText().equals("Move Tab to Previous Splitter")
                 || templatePresentation.getText().equals("Move Tab to Next Window/Splitter")
@@ -58,16 +67,18 @@ public class ShowTabMoveActions extends DumbAwareAction {
             }*/
         }
 
+        final ActionGroup enabledActionGroup = new DefaultActionGroup(enabledActions);
+
         JBPopupFactory.getInstance()
                 .createActionGroupPopup("TabMover Actions",
-                                        actionGroup,
-                                        context,
-                                        SHOW_NUMBERS,
-                                        USE_ALPHA_AS_NUMBERS,
-                                        false,
-                                        null /*onDispose*/,
-                                        MAX_COUNT,
-                                        null)
+                        enabledActionGroup,
+                        context,
+                        SHOW_NUMBERS,
+                        USE_ALPHA_AS_NUMBERS,
+                        false,
+                        null /*onDispose*/,
+                        MAX_COUNT,
+                        null)
                 .showInBestPositionFor(editor);
     }
 
